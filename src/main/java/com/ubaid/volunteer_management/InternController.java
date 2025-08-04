@@ -84,7 +84,26 @@ public class InternController {
         return ResponseEntity.ok(savedIntern);
     }
 
-//    @PutMapping("/{id}")
-//    @PreAuthorize("hasRole('ADMIN')")
-//    public ResponseEntity
+    @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Intern> updateIntern(@PathVariable Long id,
+                                               @Valid @RequestBody Intern internDetails) {
+        Intern updatedIntern = internService.updateIntern(id, internDetails);
+
+        if (updatedIntern != null) {
+            return ResponseEntity.ok(updatedIntern);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Void> deleteIntern(@PathVariable Long id) {
+        if (internService.deleteIntern(id)) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
