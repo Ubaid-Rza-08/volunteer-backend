@@ -1,6 +1,7 @@
-package com.ubaid.volunteer_management;
+package com.ubaid.volunteer_management.intern;
 
 
+import com.ubaid.volunteer_management.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

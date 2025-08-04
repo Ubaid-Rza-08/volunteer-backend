@@ -1,6 +1,8 @@
-package com.ubaid.volunteer_management;
+package com.ubaid.volunteer_management.Auth;
 
 
+import com.ubaid.volunteer_management.user.User;
+import com.ubaid.volunteer_management.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

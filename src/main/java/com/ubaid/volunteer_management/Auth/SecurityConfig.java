@@ -1,6 +1,7 @@
-package com.ubaid.volunteer_management;
+package com.ubaid.volunteer_management.Auth;
 
 
+import com.ubaid.volunteer_management.user.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.ubaid.volunteer_management;
+package com.ubaid.volunteer_management.volunteer;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

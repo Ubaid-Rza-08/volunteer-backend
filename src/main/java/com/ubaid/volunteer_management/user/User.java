@@ -1,4 +1,4 @@
-package com.ubaid.volunteer_management;
+package com.ubaid.volunteer_management.user;
 
 
 import jakarta.persistence.*;

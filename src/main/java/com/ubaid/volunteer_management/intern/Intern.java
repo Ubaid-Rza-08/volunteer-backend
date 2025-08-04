@@ -1,14 +1,16 @@
-package com.ubaid.volunteer_management;
+package com.ubaid.volunteer_management.intern;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ubaid.volunteer_management.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "volunteers")
-public class Volunteer {
+@Table(name = "interns")
+public class Intern {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,9 +26,17 @@ public class Volunteer {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    private String skills;
+    private String university;
 
-    private String availability;
+    private String major;
+
+    @Column(name = "start_date")
+    private LocalDate startDate;
+
+    @Column(name = "end_date")
+    private LocalDate endDate;
+
+    private String department;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -40,18 +50,22 @@ public class Volunteer {
     private User createdBy;
 
     // Constructors
-    public Volunteer() {
+    public Intern() {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
 
-    public Volunteer(String name, String email, String phoneNumber, String skills, String availability) {
+    public Intern(String name, String email, String phoneNumber, String university,
+                  String major, LocalDate startDate, LocalDate endDate, String department) {
         this();
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.skills = skills;
-        this.availability = availability;
+        this.university = university;
+        this.major = major;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.department = department;
     }
 
     @PreUpdate
@@ -92,20 +106,44 @@ public class Volunteer {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getSkills() {
-        return skills;
+    public String getUniversity() {
+        return university;
     }
 
-    public void setSkills(String skills) {
-        this.skills = skills;
+    public void setUniversity(String university) {
+        this.university = university;
     }
 
-    public String getAvailability() {
-        return availability;
+    public String getMajor() {
+        return major;
     }
 
-    public void setAvailability(String availability) {
-        this.availability = availability;
+    public void setMajor(String major) {
+        this.major = major;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
     public LocalDateTime getCreatedAt() {

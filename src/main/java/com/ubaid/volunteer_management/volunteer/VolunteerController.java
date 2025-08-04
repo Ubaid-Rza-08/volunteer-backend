@@ -1,4 +1,4 @@
-package com.ubaid.volunteer_management;
+package com.ubaid.volunteer_management.volunteer;
 
 
 import jakarta.validation.Valid;
@@ -19,14 +19,14 @@ public class VolunteerController {
     private VolunteerService volunteerService;
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<Volunteer>> getAllVolunteers() {
         List<Volunteer> volunteers = volunteerService.getAllVolunteers();
         return ResponseEntity.ok(volunteers);
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Volunteer> getVolunteerById(@PathVariable Long id) {
         Optional<Volunteer> volunteer = volunteerService.getVolunteerById(id);
         return volunteer.map(ResponseEntity::ok)
@@ -34,7 +34,7 @@ public class VolunteerController {
     }
 
     @GetMapping("/email/{email}")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Volunteer> getVolunteerByEmail(@PathVariable String email) {
         Optional<Volunteer> volunteer = volunteerService.getVolunteerByEmail(email);
         return volunteer.map(ResponseEntity::ok)
@@ -42,21 +42,21 @@ public class VolunteerController {
     }
 
     @GetMapping("/search/name")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<Volunteer>> searchByName(@RequestParam String name) {
         List<Volunteer> volunteers = volunteerService.searchByName(name);
         return ResponseEntity.ok(volunteers);
     }
 
     @GetMapping("/search/skill")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<Volunteer>> searchBySkill(@RequestParam String skill) {
         List<Volunteer> volunteers = volunteerService.searchBySkill(skill);
         return ResponseEntity.ok(volunteers);
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<Volunteer> createVolunteer(@Valid @RequestBody Volunteer volunteer) {
         if (volunteerService.existsByEmail(volunteer.getEmail())) {
             return ResponseEntity.badRequest().build();

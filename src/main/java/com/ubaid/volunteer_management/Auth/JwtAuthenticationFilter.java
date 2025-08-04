@@ -1,6 +1,7 @@
-package com.ubaid.volunteer_management;
+package com.ubaid.volunteer_management.Auth;
 
 
+import com.ubaid.volunteer_management.user.UserDetailsServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

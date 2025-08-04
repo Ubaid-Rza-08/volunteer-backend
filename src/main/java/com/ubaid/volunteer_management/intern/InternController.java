@@ -1,4 +1,4 @@
-package com.ubaid.volunteer_management;
+package com.ubaid.volunteer_management.intern;
 
 
 import jakarta.validation.Valid;
@@ -21,14 +21,14 @@ public class InternController {
     private InternService internService;
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<Intern>> getAllInterns() {
         List<Intern> interns = internService.getAllInterns();
         return ResponseEntity.ok(interns);
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Intern> getInternById(@PathVariable Long id) {
         Optional<Intern> intern = internService.getInternById(id);
         return intern.map(ResponseEntity::ok)
@@ -36,7 +36,7 @@ public class InternController {
     }
 
     @GetMapping("/email/{email}")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Intern> getInternByEmail(@PathVariable String email) {
         Optional<Intern> intern = internService.getInternByEmail(email);
         return intern.map(ResponseEntity::ok)
@@ -44,28 +44,28 @@ public class InternController {
     }
 
     @GetMapping("/search/name")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<Intern>> searchByName(@RequestParam String name) {
         List<Intern> interns = internService.searchByName(name);
         return ResponseEntity.ok(interns);
     }
 
     @GetMapping("/search/university")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<Intern>> searchByUniversity(@RequestParam String university) {
         List<Intern> interns = internService.searchByUniversity(university);
         return ResponseEntity.ok(interns);
     }
 
     @GetMapping("/search/department")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<Intern>> searchByDepartment(@RequestParam String department) {
         List<Intern> interns = internService.searchByDepartment(department);
         return ResponseEntity.ok(interns);
     }
 
     @GetMapping("/search/date-range")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<Intern>> getInternsByDateRange(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
@@ -74,12 +74,11 @@ public class InternController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<Intern> createIntern(@Valid @RequestBody Intern intern) {
         if (internService.existsByEmail(intern.getEmail())) {
             return ResponseEntity.badRequest().build();
         }
-
         Intern savedIntern = internService.saveIntern(intern);
         return ResponseEntity.ok(savedIntern);
     }

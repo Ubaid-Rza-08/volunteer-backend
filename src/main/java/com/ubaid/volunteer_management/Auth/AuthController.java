@@ -1,5 +1,6 @@
-package com.ubaid.volunteer_management;
+package com.ubaid.volunteer_management.Auth;
 
+import com.ubaid.volunteer_management.user.User;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
